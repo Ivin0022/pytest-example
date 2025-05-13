@@ -15,3 +15,5 @@ assert add(5, 0) == 5, "Failed on adding zero"
 
 # Test adding two zeros
 assert add(0, 0) == 0, "Failed on adding two zeros"
+
+assert add("0", 0) is None, "failed when passing string"
