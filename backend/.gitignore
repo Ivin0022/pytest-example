@@ -1,0 +1,17 @@
+# Ignore SQLite database file
+db.sqlite3
+
+# Python-related ignores
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+
+# IDE and editor files
+*.swp
+*.swo
+.idea/
+.vscode/
+
+.env
