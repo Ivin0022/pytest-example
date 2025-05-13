@@ -1,4 +1,6 @@
 def add(a, b):
+    if not isinstance(a, int):
+        return None
     return a + b
 
 

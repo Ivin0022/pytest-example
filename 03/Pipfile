@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pytest-cov = "*"
+pytest = "*"
 
 [dev-packages]
 pytest = "*"
