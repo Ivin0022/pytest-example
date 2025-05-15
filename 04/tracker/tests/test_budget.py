@@ -23,5 +23,19 @@ def test_budget_listing(db, client):
 
     res = client.get("/api/budgets/")
     data = res.data
-    assert len(data['results']) == 100
-    assert data['next'] is not None
+    assert len(data["results"]) == 100
+    assert data["next"] is not None
+
+
+def test_budget_tot(db, client):
+    num = 3
+    amount = 100
+    BudgetFactory.create_batch(
+        num,
+        amount=amount,
+    )
+
+    res = client.get("/api/budgets/total/")
+    data = res.data
+    assert res.status_code == 200
+    assert data["total"] == (num * amount)
