@@ -1,17 +1,27 @@
 from tracker.models import Budget
-``
-
-def test_budget_creation1(db, user):
-        pass
-
-def test_budget_creation2(db, user):
-    from users.models import User
-
-    assert User.objects.count() == 1
+from tracker.factories import BudgetFactory
 
 
-# def test_budget_listing(db, user, bulk_create_budget):
-#     bulk_create_budget(3)
-#     budget = Budget.objects.all()
+def test_budget_creation(db, client):
+    res = client.post(
+        "/api/budgets/",
+        {
+            "type": "needs",
+            "amount": 1000,
+        },
+    )
 
-#     assert len(budget) == 3
+    assert res.status_code == 201
+    assert "id" in res.data
+    assert "type" in res.data
+    assert Budget.objects.count() == 1
+
+
+def test_budget_listing(db, client):
+    num = 1000
+    BudgetFactory.create_batch(num)
+
+    res = client.get("/api/budgets/")
+    data = res.data
+    assert len(data['results']) == 100
+    assert data['next'] is not None
